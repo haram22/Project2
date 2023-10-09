@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <!-- Bootstrap core CSS -->
+<link href="my.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script>
+    function checkValidate(){
+        var lecture = document.getElementById("lecture").value;
+        var prof = document.getElementById("prof").value;
+        var score = document.getElementById("score").value;
+        var category = document.getElementById("category").value;
+
+        if(lecture == '') {
+            alert("강의명을 입력해주세요.");
+            return;
+        } 
+        if(prof == '') {
+            alert("교수명을 입력해주세요.");
+            return;
+        } 
+        if(score == '') {
+            alert("학점을 입력해주세요.");
+            return;
+        } 
+        if(category == '') {
+            alert("전공여부를 입력해주세요.");
+            return;
+        } 
+        alert("게시물이 추가됩니다.");
+        location.href = "/Users/ram/Desktop/실전프로젝트/코드/Project2/index.html";
+    }
+</script>
+    <style>
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <link href="my.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin">
+  <div class="container-fluid bg-3 text-center">    
+    <h2 style="margin-bottom: 80px">📚 강의 목록 추가하기 📚</h2>
+    <div>
+      <div>
+        <h5 style="text-align: start">📌 강의명</h5>
+        <input type="lecture" class="form-control" id="lecture" placeholder="강의명">
+      </div>
+      <div> 
+        <h5 style="text-align: start">📌 교수명</h5>
+        <input type="prof" class="form-control" id="prof" placeholder="교수명">
+      </div>
+      <div>
+        <h5 style="text-align: start">📌 학점</h5>
+        <input type="score" class="form-control" id="score" placeholder="학점" inputmode="numeric">
+      </div>
+
+      <div> 
+        <h5 style="text-align: start">📌 전공여부</h5>
+        <input type="category" class="form-control" id="category" placeholder="전공여부">
+      </div>
+     
+    </div>
+  </div>
+  <button type="submit" class="submitButton" onclick="checkValidate()" style="margin-top: 20px">추가</button>
+</main>
+
+
+    
+  </body>
+</html>
