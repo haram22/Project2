@@ -34,7 +34,7 @@
 
     function addLecture(page) {
       var lectureBody = document.getElementById("lectureBody");
-      lectureBody.innerHTML = ""; // Clear the existing content
+      lectureBody.innerHTML = "";
 
       var startIndex = (page - 1) * itemsPerPage;
       var endIndex = startIndex + itemsPerPage;
@@ -48,7 +48,7 @@
         var cell4 = newRow.insertCell(3);
         var cell5 = newRow.insertCell(4);
 
-        cell1.innerHTML = `<a href="#" onclick="navigateToDetailPage(${mockItem.id})">${mockItem.lecture}</a>`;
+        cell1.innerHTML = `<a href="#" onclick="navigateToDetailPage()">${mockItem.lecture}</a>`;
         cell2.innerHTML = mockItem.prof;
         cell3.innerHTML = mockItem.score;
         cell4.innerHTML = mockItem.category;
@@ -84,10 +84,10 @@
       }
     }
     function navigateToDetailPage(id) {
-      window.location.href = `/Users/ram/Desktop/실전프로젝트/코드/Project2/view.html?id=${id}`;
+      window.location.href = `/Users/ram/Desktop/실전프로젝트/코드/Project2/view.html`;
     }
     function navigateToEditPage(id) {
-      window.location.href = "/Users/ram/Desktop/실전프로젝트/코드/Project2/edit.html?id=" + id;
+      window.location.href = "/Users/ram/Desktop/실전프로젝트/코드/Project2/edit.html";
     }
 
     function naviPage() {
@@ -102,7 +102,6 @@
     window.onload = function () {
       addLecture(currentPage);
 
-      // Set up pagination click events
       var paginationLinks = document.querySelectorAll('.pagination a.page-link');
       paginationLinks.forEach(function (link) {
         link.addEventListener('click', function () {
@@ -137,7 +136,9 @@
             <input type="text" class="form-control" placeholder="Search">
             <button type="button" class="submitButton" style="background-color: #fff">검색</button>
             <button type="submit" class="submitButton" onclick="naviPage()"
-              style="background-color: #000; color: #fff;">추가</button>
+              style="background-color: #000; color: #fff;">
+              <a href="add.html" style="color: #fff;">추가</a>
+              </button>
           </div>
         </div>
       </div>
