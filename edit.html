@@ -7,33 +7,25 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
+    <title>edit</title>
     <!-- Bootstrap core CSS -->
     <link href="my.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script>
-            window.onload = function () {
-                // Get the id from the URL parameters
-                const urlParams = new URLSearchParams(window.location.search);
-                const id = urlParams.get('id');
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
 
-                // Find the lecture details based on the id
-                const lecture = mockData.find(item => item.id == id);
-
-                // Populate the input fields with lecture details
-                if (lecture) {
-                    document.getElementById('lecture').value = lecture.lecture;
-                    document.getElementById('prof').value = lecture.prof;
-                    document.getElementById('score').value = lecture.score;
-                    document.getElementById('category').value = lecture.category;
-                } else {
-                    // Handle the case where the lecture with the given id is not found
-                    console.error('Lecture not found');
-                }
-            };
-
-            function checkValidate() {
-                // Your validation and submission logic here
+            const lecture = mockData.find(item => item.id == id);
+            if (lecture) {
+                document.getElementById('lecture').value = lecture.lecture;
+                document.getElementById('prof').value = lecture.prof;
+                document.getElementById('score').value = lecture.score;
+                document.getElementById('category').value = lecture.category;
+            } else {
+                console.error('Lecture not found');
             }
+        };
         function checkValidate() {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
