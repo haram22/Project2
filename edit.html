@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <!-- Bootstrap core CSS -->
+    <link href="my.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script>
+            window.onload = function () {
+                // Get the id from the URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const id = urlParams.get('id');
+
+                // Find the lecture details based on the id
+                const lecture = mockData.find(item => item.id == id);
+
+                // Populate the input fields with lecture details
+                if (lecture) {
+                    document.getElementById('lecture').value = lecture.lecture;
+                    document.getElementById('prof').value = lecture.prof;
+                    document.getElementById('score').value = lecture.score;
+                    document.getElementById('category').value = lecture.category;
+                } else {
+                    // Handle the case where the lecture with the given id is not found
+                    console.error('Lecture not found');
+                }
+            };
+
+            function checkValidate() {
+                // Your validation and submission logic here
+            }
+        function checkValidate() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            var lecture = document.getElementById("lecture").value;
+            var prof = document.getElementById("prof").value;
+            var score = document.getElementById("score").value;
+            var category = document.getElementById("category").value;
+
+            if (lecture == '') {
+                alert("강의명을 입력해주세요.");
+                return;
+            }
+            if (prof == '') {
+                alert("교수명을 입력해주세요.");
+                return;
+            }
+            if (score == '') {
+                alert("학점을 입력해주세요.");
+                return;
+            }
+            if (category == '') {
+                alert("전공여부를 입력해주세요.");
+                return;
+            }
+
+            var confirmed = confirm("게시물을 수정하시겠습니까?")
+            if (confirmed) {
+                location.href = "/Users/ram/Desktop/실전프로젝트/코드/Project2/index.html";
+            } else {
+                console.log(id)
+            }
+
+        }
+    </script>
+    <style>
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <link href="my.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+
+    <main class="form-signin">
+        <div class="container-fluid bg-3 text-center">
+            <h2 style="margin-bottom: 80px">📚 강의 정보 수정하기 📚</h2>
+            <div>
+                <div>
+                    <h5 style="text-align: start">📌 강의명</h5>
+                    <input type="lecture" class="form-control" id="lecture" value="실전프로젝트1">
+                </div>
+                <div>
+                    <h5 style="text-align: start">📌 교수명</h5>
+                    <input type="prof" class="form-control" id="prof" value="장소연교수님">
+                </div>
+                <div>
+                    <h5 style="text-align: start">📌 학점</h5>
+                    <input type="score" class="form-control" id="score" inputmode="numeric" value="2">
+                </div>
+
+                <div>
+                    <h5 style="text-align: start">📌 전공여부</h5>
+                    <input type="category" class="form-control" id="category" value="전공">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="submitButton" onclick="checkValidate()" style="margin-top: 20px">수정</button>
+    </main>
+
+
+
+</body>
+
+</html>

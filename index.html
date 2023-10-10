@@ -8,40 +8,109 @@
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.88.1">
   <!-- Bootstrap core CSS -->
-  <link href="my.css" rel="stylesheet"
+  <link href="/Users/ram/Desktop/실전프로젝트/코드/Project2/my.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  
+
   <script>
     var mockData = [
       { id: 1, lecture: "실전프로젝트1", prof: "장소연교수님", score: "2", category: "전공" },
       { id: 2, lecture: "컴퓨터구조", prof: "용환기교수님", score: "3", category: "전공" },
       { id: 3, lecture: "중국어1", prof: "민성아교수님", score: "3", category: "교양" },
+      { id: 4, lecture: "공학설계입문", prof: "김기석교수님", score: "3", category: "전공설계" },
+      { id: 5, lecture: "통계학", prof: "김헌주교수님", score: "3", category: "BSM" },
+      { id: 6, lecture: "이산수학", prof: "최희열교수님", score: "3", category: "BSM" },
+      { id: 7, lecture: "논리설계", prof: "김신웅교수님", score: "3", category: "전공" },
+      { id: 8, lecture: "데이타구조", prof: "김호준교수님", score: "3", category: "전공" },
+      { id: 9, lecture: "OSS", prof: "장소연교수님", score: "3", category: "전공" },
+      { id: 10, lecture: "C 실습", prof: "김광교수님", score: "1", category: "전공" },
 
     ];
 
-    function addLecture() {
-      var lectureBody = document.getElementById("lectureBody");
+    var itemsPerPage = 5;
+    var currentPage = 1;
+    var totalItems = mockData.length;
+    var totalPages = Math.ceil(totalItems / itemsPerPage);
 
-      mockData.forEach(function (mockData) {
+    function addLecture(page) {
+      var lectureBody = document.getElementById("lectureBody");
+      lectureBody.innerHTML = ""; // Clear the existing content
+
+      var startIndex = (page - 1) * itemsPerPage;
+      var endIndex = startIndex + itemsPerPage;
+
+      for (var i = startIndex; i < endIndex && i < totalItems; i++) {
+        var mockItem = mockData[i];
         var newRow = lectureBody.insertRow();
         var cell1 = newRow.insertCell(0);
         var cell2 = newRow.insertCell(1);
         var cell3 = newRow.insertCell(2);
         var cell4 = newRow.insertCell(3);
+        var cell5 = newRow.insertCell(4);
 
-        cell1.innerHTML = mockData.lecture;
-        cell2.innerHTML = mockData.prof;
-        cell3.innerHTML = mockData.score;
-        cell4.innerHTML = mockData.category;
-      });
+        cell1.innerHTML = `<a href="#" onclick="navigateToDetailPage(${mockItem.id})">${mockItem.lecture}</a>`;
+        cell2.innerHTML = mockItem.prof;
+        cell3.innerHTML = mockItem.score;
+        cell4.innerHTML = mockItem.category;
+
+        // 수정버튼
+        var editButton = document.createElement("button");
+        editButton.innerHTML = "✏️";
+        editButton.style.backgroundColor = "#ffffcc"
+        editButton.className = "btn btn-info";
+        editButton.style.borderColor = "#000"
+        editButton.onclick = function () {
+          navigateToEditPage(mockData.id);
+        };
+
+        editButton.onclick = function () {
+          // navigateToEditPage(mockData.id);
+          navigateToEditPage()
+        }
+
+        // 삭제버튼
+        var deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "X";
+        deleteButton.style.backgroundColor = "#D88489"
+        deleteButton.className = "btn btn-info";
+        deleteButton.style.borderColor = "#000";
+        deleteButton.style.width = "40px";
+
+        deleteButton.onclick = function () {
+          confirm("정말로 삭제하시겠습니까?")
+        };
+
+        cell5.appendChild(editButton);
+        cell5.appendChild(deleteButton);
+      }
+    }
+    function navigateToDetailPage(id) {
+      window.location.href = `/Users/ram/Desktop/실전프로젝트/코드/Project2/view.html?id=${id}`;
+    }
+    function navigateToEditPage(id) {
+      window.location.href = "/Users/ram/Desktop/실전프로젝트/코드/Project2/edit.html?id=" + id;
     }
 
     function naviPage() {
-        window.location.href = "/Users/ram/Desktop/실전프로젝트/코드/Project2/add.html";
+      window.location.href = "/Users/ram/Desktop/실전프로젝트/코드/Project2/add.html";
     }
 
-    // 페이지 로드시 초기 데이터 로드
-    window.onload = addLecture;
+    function loadPage(page) {
+      currentPage = page;
+      addLecture(currentPage);
+    }
+
+    window.onload = function () {
+      addLecture(currentPage);
+
+      // Set up pagination click events
+      var paginationLinks = document.querySelectorAll('.pagination a.page-link');
+      paginationLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var page = parseInt(link.innerHTML);
+          loadPage(page);
+        });
+      });
+    };
   </script>
 
   <style>
@@ -59,23 +128,47 @@
 
   <main class="form-signin">
     <div class="container-fluid bg-3 text-center">
-      <h2>📚 강의 목록 📚</h2>
-      <table class="lecture-table" id="lectureTable">
+      <div class="row align-items-center justify-content-between" style="margin-bottom: 30px;">
+        <div class="col-md-6">
+          <h2 style="margin-bottom: 20px;">📚 강의 목록 📚</h2>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <button type="button" class="submitButton" style="background-color: #fff">검색</button>
+            <button type="submit" class="submitButton" onclick="naviPage()"
+              style="background-color: #000; color: #fff;">추가</button>
+          </div>
+        </div>
+      </div>
+      <table class="lecture-table" id="lectureTable" style="margin-top: 40px;">
         <thead>
           <tr>
             <th>강의명</th>
             <th>교수명</th>
             <th>학점</th>
             <th>전공여부</th>
+            <th>MENU</th>
           </tr>
         </thead>
         <tbody id="lectureBody">
         </tbody>
       </table>
+      <div id="pagination-container" class="mt-3">
+        <ul class="pagination justify-content-center">
+          <ul class="pagination" style="margin-top: 40px;">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
 
+        </ul>
 
+      </div>
     </div>
-    <button type="submit" class="submitButton" onclick="naviPage()" style="margin-top: 40px">추가</button>
+
   </main>
 </body>
 

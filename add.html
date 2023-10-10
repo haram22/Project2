@@ -34,6 +34,9 @@
         alert("게시물이 추가됩니다.");
         location.href = "/Users/ram/Desktop/실전프로젝트/코드/Project2/index.html";
     }
+    function navigateToHome(id) {
+      window.location.href = `/Users/ram/Desktop/실전프로젝트/코드/Project2/index.html`;
+    }
 </script>
     <style>
 
@@ -51,7 +54,9 @@
 <main class="form-signin">
   <div class="container-fluid bg-3 text-center">    
     <h2 style="margin-bottom: 80px">📚 강의 목록 추가하기 📚</h2>
+    <button type="submit" class="goBackButton" onclick="navigateToHome()">목록으로 돌아가기</button>
     <div>
+      
       <div>
         <h5 style="text-align: start">📌 강의명</h5>
         <input type="lecture" class="form-control" id="lecture" placeholder="강의명">
@@ -69,7 +74,6 @@
         <h5 style="text-align: start">📌 전공여부</h5>
         <input type="category" class="form-control" id="category" placeholder="전공여부">
       </div>
-     
     </div>
   </div>
   <button type="submit" class="submitButton" onclick="checkValidate()" style="margin-top: 20px">추가</button>
